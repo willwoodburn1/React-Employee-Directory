@@ -1,9 +1,14 @@
 import React from "react";
 
+
 function EmployeeData(props) {
+
+
+
     return (
         <div className="table-responsive">
             <table className="table">
+
                 <tbody>
                     <tr>
                         <th scope="row">{props.id}</th>
@@ -14,6 +19,7 @@ function EmployeeData(props) {
                         <td>EMPLOYEE AGE</td>
                     </tr>
                 </tbody>
+
             </table>
         </div>
     )
