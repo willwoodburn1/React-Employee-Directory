@@ -7,16 +7,29 @@ class EmployeeTable extends Component {
 
     state = {
         results: [],
-        search: ""
+        age: "",
+        name: ""
+
     }
 
     componentDidMount() {
         this.findUsers()
     }
 
-    findUsers = query => {
-        API.search(query)
-            .then(res => this.setState({ results: res.data.results }))
+    findUsers = (searchType, searchValue) => {
+        API.search()
+            .then(res => {
+                let filteredResults = res.data.results;
+
+                if (searchType === "searchName") {
+                    filteredResults = filteredResults.filter((result) => result["name"].name === searchValue)
+
+                } else if (searchType ==="searchAge") {
+                    filteredResults = filteredResults.filter((result) => result["dob"].age === searchValue);
+                } 
+
+                this.setState({ results: filteredResults })
+            })
     }
 
     handleInputChange = event => {
@@ -27,15 +40,24 @@ class EmployeeTable extends Component {
     };
 
     handleFormSubmit = event => {
+        const { name } = event.target;
         event.preventDefault();
-        this.findUsers(this.state.search);
+
+        if (name === "searchName") {
+            this.findUsers(name, this.state.name)
+        } else if (name === "searchAge") {
+            this.findUsers(name, this.state.age);
+        } else {
+            this.findUsers();
+        }
     }
 
     render() {
         return (
             <div>
                 <SearchForm
-                    search={this.state.search}
+                    name={this.state.name}
+                    age={this.state.age}
                     handleInputChange={this.handleInputChange}
                     handleFormSubmit={this.handleFormSubmit}
                 />

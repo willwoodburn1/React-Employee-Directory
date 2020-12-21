@@ -2,7 +2,7 @@ import React from "react";
 
 
 function EmployeeData(props) {
-    console.log(props)
+    console.log('props', props)
 
 
 
@@ -22,7 +22,7 @@ function EmployeeData(props) {
 
                 <tbody>
                     {props.results.map(result => (
-                        <tr key={result.id}>
+                        <tr key={result.login.uuid}>
                             <td>
                                 <img src={result.picture.medium} alt={`${result.name.first} ${result.name.last} pic`}>
                                 </img>

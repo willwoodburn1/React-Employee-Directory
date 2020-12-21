@@ -10,14 +10,14 @@ function SearchForm(props) {
                     <label className="col-md-12">Name:</label>
                     <input
                         onChange={props.handleInputChange}
-                        value={props.search}
+                        value={props.name}
                         name="name"
                         type="text"
                         className="form-control"
                         placeholder="Search Employee by their Name"
                         id="name"
                     />
-                    <button onClick={props.handleFormSubmit} className="btn btn-success"> Search </button>
+                    <button onClick={props.handleFormSubmit} name="searchName" className="btn btn-success"> Search </button>
                 </div>
 
                 <div className="row">
@@ -25,14 +25,14 @@ function SearchForm(props) {
                     <label className="col-md-12">Age:</label>
                     <input
                         onChange={props.handleInputChange}
-                        value={props.search}
+                        value={props.age}
                         name="age"
                         type="text"
                         className="form-control"
                         placeholder="Filter Employees by their Age"
                         id="age"
                     />
-                    <button onClick={props.handleFormSubmit} className="btn btn-success"> Search </button>
+                    <button onClick={props.handleFormSubmit} name="searchAge" className="btn btn-success"> Search </button>
 
                 </div>
 
