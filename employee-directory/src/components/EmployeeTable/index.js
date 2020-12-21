@@ -1,58 +1,46 @@
 import React, { Component } from "react";
-import TableHeading from "../TableHeadings";
 import EmployeeData from "../EmployeeData";
 import SearchForm from "../SearchForm";
-// import API from "../utils/API";
+import API from "../../utils/API"
 
 class EmployeeTable extends Component {
 
-    // state = {
-    //     users: []
-    // }
+    state = {
+        results: [],
+        search: ""
+    }
 
-    // componentDidMount() {
-    //     this.findUsers()
-    // }
+    componentDidMount() {
+        this.findUsers()
+    }
 
-    // findUsers = query => {
-    //     API.search(query)
-    //         .then(res => this.setState({ users: res.data }))
-    // }
+    findUsers = query => {
+        API.search(query)
+            .then(res => this.setState({ results: res.data.results }))
+    }
 
-    // componentWillMount() {
-    //     fetch("https://randomuser.me/api/?results=50")
-    //         .then(response => {
-    //             this.setState({
-    //                 users: response.results
-    //             })
-    //         })
-    // }
+    handleInputChange = event => {
+        const { name, value } = event.target
+        this.setState({
+            [name]: value
+        });
+    };
 
-    // handleInputChange = event => {
-    //     const { name, value } = event.target
-    //     this.setState({
-    //         [name]: value
-    //     });
-    // };
-
-    // searchEmployees = query => {
-    //     API.search(query)
-    //         .then(res => this.setState({ results: res.data.data }));
-    // }
-
-
+    handleFormSubmit = event => {
+        event.preventDefault();
+        this.findUsers(this.state.search);
+    }
 
     render() {
         return (
             <div>
-                <SearchForm />
-                <TableHeading />
+                <SearchForm
+                    search={this.state.search}
+                    handleInputChange={this.handleInputChange}
+                    handleFormSubmit={this.handleFormSubmit}
+                />
                 <EmployeeData
-                // image={this.state.users.picture.medium}
-                // name={this.state.users.name}
-                // dob={this.state.users.dob.date}
-                // email={this.state.users.email}
-                // age= {this.state.users.dob.age}
+                    results={this.state.results}
                 />
             </div>
 

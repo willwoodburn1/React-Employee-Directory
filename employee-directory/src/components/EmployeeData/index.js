@@ -2,6 +2,7 @@ import React from "react";
 
 
 function EmployeeData(props) {
+    console.log(props)
 
 
 
@@ -9,20 +10,37 @@ function EmployeeData(props) {
         <div className="table-responsive">
             <table className="table">
 
-                <tbody>
+                <thead className="thead-dark">
                     <tr>
-                        <th scope="row">{props.id}</th>
-                        <td>EMPLOYEE IMAGE </td>
-                        <td>EMPLOYEE NAME </td>
-                        <td>EMPLOYEE DOB</td>
-                        <td>EMPLOYEE EMAIL</td>
-                        <td>EMPLOYEE AGE</td>
+                        <th scope="col">Image</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Location (City)</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Age</th>
                     </tr>
+                </thead>
+
+                <tbody>
+                    {props.results.map(result => (
+                        <tr key={result.id}>
+                            <td>
+                                <img src={result.picture.medium} alt={`${result.name.first} ${result.name.last} pic`}>
+                                </img>
+                            </td>
+                            <td>{`${result.name.first} ${result.name.last}`} </td>
+                            <td>{result.location.city}</td>
+                            <td>{result.email}</td>
+                            <td>{result.dob.age}</td>
+
+                        </tr>
+
+                    ))}
                 </tbody>
 
             </table>
-        </div>
+        </div >
     )
 }
+
 
 export default EmployeeData;

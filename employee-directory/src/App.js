@@ -13,9 +13,7 @@ class App extends Component {
       <>
         <Wrapper>
           <Title> Employee Directory </Title>
-
           <EmployeeTable />
-
           <Footer />
 
         </Wrapper>
