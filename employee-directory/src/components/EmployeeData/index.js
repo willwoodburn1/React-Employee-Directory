@@ -1,27 +1,24 @@
 import React from "react";
 
-
-function EmployeeData(props) {
-    console.log('props', props)
-
-
-
+export default function EmployeeData({ results, headings, handleSort }) {
     return (
         <div className="table-responsive">
             <table className="table">
 
                 <thead className="thead-dark">
                     <tr>
-                        <th scope="col">Image</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Location (City)</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Age</th>
+                        {headings.map(({ name, text }) => (
+                            <th style={{ cursor: 'pointer' }} key={name} scope="col" onClick={
+                                () => {
+                                    handleSort(name.toLowerCase())
+                                }
+                            }>{text}</th>
+                        ))}
                     </tr>
                 </thead>
 
                 <tbody>
-                    {props.results.map(result => (
+                    {results.map(result => (
                         <tr key={result.login.uuid}>
                             <td>
                                 <img src={result.picture.medium} alt={`${result.name.first} ${result.name.last} pic`}>
@@ -31,16 +28,11 @@ function EmployeeData(props) {
                             <td>{result.location.city}</td>
                             <td>{result.email}</td>
                             <td>{result.dob.age}</td>
-
                         </tr>
-
                     ))}
                 </tbody>
 
             </table>
         </div >
     )
-}
-
-
-export default EmployeeData;
+};
